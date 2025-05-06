@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaRegBell, FaRegUser } from "react-icons/fa";
-import logo from "../assets/images/logo.jpg";
+import logo from "../assets/images/Logo.jpg";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import dummyuser from "../assets/images/dummy-user.png";
