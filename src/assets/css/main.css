@@ -110,3 +110,15 @@ button {
     background-color: rgba(136, 25, 31, 1);
     border-radius: 99px;
 }
+
+:root{
+    --primary: #2E263DE5;
+}
+
+input:focus{
+    outline: none;
+}
+
+.clip{
+    clip-path: polygon(0 59%, 100% 0, 100% 100%, 0 100%);
+}

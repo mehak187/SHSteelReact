@@ -5,11 +5,16 @@ import Dashboard from "./Pages/Dashboard";
 import Calendar from "./Pages/Calendar";
 import Managers from "./Pages/Managers";
 import ProjectCoordinators from "./Pages/ProjectCoordinators";
+import AuthLayout from "./layouts/AuthLayout";
+import Login from "./Pages/Auth/Login";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route element={<AuthLayout />}>
+          <Route element={<Login/>} path="/" />
+        </Route>
         <Route element={<UserLayout />}>
           <Route element={<Dashboard />} path="/dashboard" />
           <Route element={<Calendar />} path="/calendar" />
