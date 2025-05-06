@@ -4,11 +4,11 @@ import Navbar from "../components/Navbar";
 
 export default function UserLayout() {
   return (
-    <div>
+    <div className="relative">
       <Navbar />
       <div className="p-2 h-[calc(100dvh-83px)] bg-[#F4F5FA]">
-        <div className="py-5 max-h-full overflow-y-auto">
-          <div className="mycontainer">
+        <div className="py-5 h-full overflow-y-auto">
+          <div className="mycontainer h-full">
             <Outlet />
           </div>
         </div>

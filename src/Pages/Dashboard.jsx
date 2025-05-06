@@ -162,7 +162,7 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
-      <div className="mt-8 bg-white rounded-[6px] overflow-hidden shadow-[0px_4px_10px_0px_#2E263D33]">
+      <div className="mt-6 bg-white rounded-[6px] overflow-hidden shadow-[0px_4px_10px_0px_#2E263D33] lg:w-4/5">
         <div className="p-5 flex items-center gap-3 justify-between">
           <p className="font-medium text-lg text-[#2E263DE5]">Project List</p>
           <div>
@@ -175,7 +175,9 @@ export default function Dashboard() {
             />
           </div>
         </div>
-        <Table rows={tableRows} headers={tableHeader} />
+        <div className="pb-2">
+          <Table rows={tableRows} headers={tableHeader} />
+        </div>
       </div>
     </div>
   );
