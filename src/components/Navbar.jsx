@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaRegBell, FaRegUser } from "react-icons/fa";
 import logo from "../assets/images/Logo.jpg";
 import { Link, useLocation } from "react-router-dom";
@@ -6,9 +6,32 @@ import { FaBars, FaXmark } from "react-icons/fa6";
 import dummyuser from "../assets/images/dummy-user.png";
 import { PiBellBold } from "react-icons/pi";
 import { IoSearch } from "react-icons/io5";
+import Notifications from "./Notifications";
 
 export default function Navbar() {
   const [shownav, setshownav] = useState(false);
+  const [shownotification, setshownotification] = useState(false);
+  const navRef = useRef(null);
+  const notificationRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setshownav(false);
+      }
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(event.target)
+      ) {
+        setshownotification(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const location = useLocation();
   const Links = [
     { label: "Dashboard", path: "/dashboard" },
@@ -17,7 +40,7 @@ export default function Navbar() {
     { label: "Project Coordinators", path: "/projectcoordinators" },
   ];
   const NavLinks = () => (
-    <div className={`${shownav ? "block" : "hidden"} md:block`}>
+    <div ref={navRef} className={`${shownav ? "block" : "hidden"} md:block`}>
       <ul
         className={`flex gap-x-4 gap-y-2 absolute md:static top-full left-0 flex-col md:flex-row w-full md:w-auto bg-[#565654] md:bg-white p-4 md:p-0`}
       >
@@ -42,7 +65,11 @@ export default function Navbar() {
   return (
     <div className="bg-white relative">
       <div className="mycontainer">
-        <nav className="py-3 flex items-center gap-6 lg:gap-10">
+        <nav
+          className={`py-3 flex items-center gap-6 lg:gap-10 ${
+            shownotification && "relative"
+          }`}
+        >
           <div className="max-w-[80px]">
             <img src={logo} alt="Logo" />
           </div>
@@ -62,7 +89,10 @@ export default function Navbar() {
             </div>
           </div>
           <div className="flex items-center gap-4 ms-auto">
-            <button className="relative">
+            <button
+              onClick={() => setshownotification(true)}
+              className="relative"
+            >
               <PiBellBold className="text-xl text-[#2E263DE5]" />
               <div
                 className={`size-3 absolute rounded-full border-3 border-[#F4F5FA] bg-[#FF4C51] top-[-6px] right-0`}
@@ -89,6 +119,17 @@ export default function Navbar() {
               )}
             </button>
           </div>
+          {shownotification && (
+            <div className="fixed inset-0 bg-[rgba(0,0,0,0.3)] z-10"></div>
+          )}
+          {shownotification && (
+            <div
+              ref={notificationRef}
+              className="absolute z-20 top-[calc(100%+10px)] right-0 bg-white rounded-[6px] w-full max-w-[800px]"
+            >
+              <Notifications />
+            </div>
+          )}
         </nav>
       </div>
     </div>

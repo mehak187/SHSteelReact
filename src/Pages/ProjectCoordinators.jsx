@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Table from "../components/Table";
 import dummyuser from "../assets/images/dummy-user.png";
 import { FaEllipsisVertical } from "react-icons/fa6";
-import Addmanager from "../components/Manager/Addmanager";
 import AddCoordinator from "../components/coordinator/AddCoordinator";
 
 export default function ProjectCoordinators() {
