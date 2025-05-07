@@ -85,7 +85,7 @@
     font-family: 'Inter';
 }
 
-.mycontainer{
+.mycontainer {
     width: 100%;
     max-width: 1350px;
     margin: 0 auto;
@@ -96,9 +96,13 @@ button {
     cursor: pointer;
 }
 
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -111,14 +115,18 @@ button {
     border-radius: 99px;
 }
 
-:root{
+.scroll-y-hidden::-webkit-scrollbar {
+    width: 0px;
+}
+
+:root {
     --primary: #2E263DE5;
 }
 
-input:focus{
+input:focus {
     outline: none;
 }
 
-.clip{
+.clip {
     clip-path: polygon(0 59%, 100% 0, 100% 100%, 0 100%);
 }
