@@ -69,11 +69,10 @@ export default function Managers() {
         </div>
       </div>,
       <p
-        className={`inline-block text-xs py-1 px-3 rounded-full ${
-          item.status === "Active"
+        className={`inline-block text-xs py-1 px-3 rounded-full ${item.status === "Active"
             ? "text-[#56CA00] bg-[#56CA0029]"
             : "text-[#8C57FF] bg-[#8C57FF29]"
-        }`}
+          }`}
       >
         {item.status}
       </p>,
@@ -87,21 +86,25 @@ export default function Managers() {
   return (
     <div className="h-full">
       <div className="bg-white rounded-[6px] overflow-hidden min-h-full shadow-[0px_4px_10px_0px_#2E263D33]">
-        <div className="p-5 flex items-center gap-3 justify-between">
-          <div className="ms-auto flex flex-wrap items-center gap-3">
-            <input
-              className="border border-[#2E263D38] p-2 outline-0 text-sm rounded-[6px]"
-              placeholder="Search Project"
-              type="search"
-              name="searchProject"
-              id="searchProject"
-            />
-            <button
-              className="text-white text-sm font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-4 shadow-[0px_2px_4px_0px_#2E263D29]"
-              onClick={() => setOpen(true)}
-            >
-              Add Manager
-            </button>
+        <div className="p-5">
+          <div className="sm:flex justify-between items-center gap-3">
+            <div>
+              <input
+                className="border border-[#2E263D38] p-2 outline-0 text-sm rounded-[6px] w-full"
+                placeholder="Search Project"
+                type="search"
+                name="searchProject"
+                id="searchProject"
+              />
+            </div>
+            <div className="flex justify-end sm:mt-0 mt-3">
+              <button
+                className="text-white text-sm font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-4 shadow-[0px_2px_4px_0px_#2E263D29]"
+                onClick={() => setOpen(true)}
+              >
+                Add Manager
+              </button>
+            </div>
           </div>
         </div>
         <div className="pb-2">

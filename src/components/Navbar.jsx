@@ -63,7 +63,7 @@ export default function Navbar() {
   );
 
   return (
-    <div className="bg-white relative">
+    <div className="bg-white relative z-20">
       <div className="mycontainer">
         <nav
           className={`py-3 flex items-center gap-6 lg:gap-10 ${

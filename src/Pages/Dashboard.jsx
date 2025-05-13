@@ -163,9 +163,11 @@ export default function Dashboard() {
         ))}
       </div>
       <div className="mt-6 bg-white rounded-[6px] overflow-hidden shadow-[0px_4px_10px_0px_#2E263D33] lg:w-4/5">
-        <div className="p-5 flex items-center gap-3 justify-between">
-          <p className="font-medium text-lg text-[#2E263DE5]">Project List</p>
+        <div className="p-5 sm:flex items-center gap-3 justify-between">
           <div>
+          <p className="font-medium text-lg text-[#2E263DE5]">Project List</p>
+          </div>
+          <div className="flex justify-end sm:mt-0 mt-3">
             <input
               className="border border-[#2E263D38] p-2 outline-0 text-sm rounded-[6px]"
               placeholder="Search Project"
