@@ -87,7 +87,7 @@
 
 .mycontainer {
     width: 100%;
-    max-width: 1350px;
+    /* max-width: 1350px; */
     margin: 0 auto;
     padding: 0 10px;
 }
@@ -129,4 +129,12 @@ input:focus {
 
 .clip {
     clip-path: polygon(0 59%, 100% 0, 100% 100%, 0 100%);
+}
+
+.custom-border:nth-child(5n){
+    border-right: 4px solid #000;
+}
+
+.custom-border{
+    border-bottom: 4px solid #000;
 }
