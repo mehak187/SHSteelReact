@@ -87,14 +87,16 @@ export default function TabComponent({ tabs }) {
                     ))}
                 </Tabs>
                 <div className='flex justify-end sm:mt-0 mt-3'>
-                    <div>
-                        <button
-                            className="text-white text-base font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-4 shadow-[0px_2px_4px_0px_#2E263D29]"
-                            onClick={() => setOpen(true)}
-                        >
-                            + Add New Project
-                        </button>
-                    </div>
+                    {value !== 1 && ( // Hide button on tab 2 (index 1)
+                        <div>
+                            <button
+                                className="text-white text-base font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-4 shadow-[0px_2px_4px_0px_#2E263D29]"
+                                onClick={() => setOpen(true)}
+                            >
+                                + Add New Project
+                            </button>
+                        </div>
+                    )}
                     <AddNewProject open={open} onOpenChange={setOpen} />
                 </div>
                 </div>
