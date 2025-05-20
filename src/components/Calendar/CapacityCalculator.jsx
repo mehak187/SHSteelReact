@@ -39,9 +39,9 @@ const CapacityCalculator = () => {
         <div>
             <div className='2xl:flex mt-5 gap-12'>
                 <div className='2xl:w-[40%]'>
-                    <div className='flex justify-between'>
+                    <div className='flex justify-between items-center'>
                         <div>
-                            <h4 className='font-medium text-3xl '>Capacity Calculator</h4>
+                            <h4 className='font-medium sm:text-3xl text-xl'>Capacity Calculator</h4>
                         </div>
                         <div>
                             <button
