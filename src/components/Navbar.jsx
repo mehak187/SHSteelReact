@@ -38,7 +38,7 @@ export default function Navbar() {
     { label: "Calendar", path: "/calendar" },
     { label: "Managers", path: "/managers" },
     { label: "Project Coordinators", path: "/projectcoordinators" },
-    { label: "Completed Projects", path: ""}
+    { label: "Completed Projects", path: "/completedproject"}
   ];
   const NavLinks = () => (
     <div ref={navRef} className={`${shownav ? "block" : "hidden"} lg:block`}>

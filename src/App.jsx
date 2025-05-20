@@ -7,6 +7,8 @@ import Managers from "./Pages/Managers";
 import ProjectCoordinators from "./Pages/ProjectCoordinators";
 import AuthLayout from "./layouts/AuthLayout";
 import Login from "./Pages/Auth/Login";
+import CompletedProjects from "./Pages/CompletedProjects";
+import DetailProject from "./Pages/DetailProject";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route element={<Calendar />} path="/calendar" />
           <Route element={<Managers />} path="/managers" />
           <Route element={<ProjectCoordinators />} path="/projectcoordinators" />
+          <Route element={<CompletedProjects/>} path="/completedproject" />
+          <Route element={<DetailProject/>} path="/detail" />
         </Route>
       </Routes>
     </Router>
