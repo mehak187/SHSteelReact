@@ -91,11 +91,11 @@ const CalendarComponent = () => {
                         </th>
                         <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-lg rounded-t-[9px] border-x-4 border-[#F4F5FA]">PC</th>
                         <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-lg rounded-tl-xl border-l-4 border-[#F4F5FA]">Dept</th>
-                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-sm rounded-tr-xl border-r-4 border-[#F4F5FA]">Man Hrs</th>
-                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-sm rounded-t-lg border-x-4 border-[#F4F5FA]">Tonnage</th>
-                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-sm rounded-t-lg border-x-4 border-[#F4F5FA]">Schedule Type</th>
-                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-sm rounded-t-lg border-x-4 border-[#F4F5FA]">Start Date</th>
-                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-sm rounded-t-lg border-x-4 border-[#F4F5FA]">Stop Duration Weeks</th>
+                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-xs rounded-tr-xl border-r-4 border-[#F4F5FA]">Man Hrs</th>
+                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-xs rounded-t-lg border-x-4 border-[#F4F5FA]">Tonnage</th>
+                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-xs rounded-t-lg border-x-4 border-[#F4F5FA]">Schedule Type</th>
+                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-xs rounded-t-lg border-x-4 border-[#F4F5FA]">Start Date</th>
+                        <th rowSpan={2} className="text-[#FFFFFF99] bg-black p-2 text-xs rounded-t-lg border-x-4 border-[#F4F5FA]">Stop Duration Weeks</th>
                         {dates.map((date, index) => (
                             <th
                                 key={index}
@@ -132,11 +132,11 @@ const CalendarComponent = () => {
                                 <td rowSpan={3} className={`text-start border-r border-[#00000021] ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 `}>
                                     <p className="text-[#828280]">{row.pc}</p>
                                 </td>
-                                <td rowSpan={3} className={`text-start border-r border-[#00000021] ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 `}>
+                                <td rowSpan={3} className={`text-start border-l border-[#00000021] ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 `}>
                                     <div>
                                         {row.departments.map((dept, index) => (
                                             <p
-                                                className={`py-1 px-3 w-full rounded-lg mb-2 ${dept === "SHOP"
+                                                className={`py-1 px-3 w-full rounded-lg mb-2 text-xs ${dept === "SHOP"
                                                     ? "text-white bg-[#88191F]"
                                                     : dept === "MISC"
                                                         ? "text-white bg-[#565654]"
@@ -151,7 +151,7 @@ const CalendarComponent = () => {
                                 <td rowSpan={3} className={`text-start border-r border-[#00000021] ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 `}>
                                     <div>
                                         {row.manHours.map((hour, index) => (
-                                            <p key={index} className="border-b border-[#2E263D1F] p-2 text-[#828280] text-sm">
+                                            <p key={index} className="border-b border-[#2E263D1F] p-2 text-[#828280] text-xs">
                                                 {hour}
                                             </p>
                                         ))}
@@ -164,7 +164,7 @@ const CalendarComponent = () => {
                                                 <div key={index} className="border-b border-[#2E263D1F] p-2 flex items-center">
                                                     <div>
                                                         <img src={Eur} alt="" className='w-[25px] object-contain' />
-                                                    </div><p className='text-[#828280] text-sm'>{tonnage}</p>
+                                                    </div><p className='text-[#828280] text-xs'>{tonnage}</p>
                                                 </div>
                                             ))
                                         ) : (
@@ -192,7 +192,7 @@ const CalendarComponent = () => {
                                 <td rowSpan={3} className={`text-start border-r border-[#00000021] ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 `}>
                                     <div>
                                         {row.startDates.map((date, index) => (
-                                            <p key={index} className="border-b border-[#2E263D1F] text-[#828280] text-sm p-2 text-nowrap">
+                                            <p key={index} className="border-b border-[#2E263D1F] text-[#828280] text-xs p-2 text-nowrap">
                                                 {date}
                                             </p>
                                         ))}
@@ -201,28 +201,28 @@ const CalendarComponent = () => {
                                 <td rowSpan={3} className={`text-start border-r border-[#00000021] ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 `}>
                                     <div>
                                         {row.durationWeeks.map((week, index) => (
-                                            <p key={index} className="border-b border-[#2E263D1F] p-2 text-[#828280] text-sm">
+                                            <p key={index} className="border-b border-[#2E263D1F] p-2 text-[#828280] text-xs">
                                                 {week}
                                             </p>
                                         ))}
                                     </div>
                                 </td>
                                 {[...Array(2)].map((_, index) => (
-                                    <td key={index} colSpan={5} className={`text-center text-[#2E263DE5] text-sm ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 border-r-4 border-[#000]`}>
+                                    <td key={index} colSpan={5} className={`text-center text-[#2E263DE5] text-xs ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 border-r-4 border-[#000]`}>
                                         {row.hours[0]}hrs
                                     </td>
                                 ))}
                             </tr>
                             <tr className='border-b border-[#2E263D1F]'>
                                 {[...Array(2)].map((_, index) => (
-                                    <td key={index} colSpan={5} className={`text-center h-[50px] text-[#2E263DE5] text-sm ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 border-r-4 border-[#000]`}>
+                                    <td key={index} colSpan={5} className={`text-center h-[50px] text-[#2E263DE5] text-xs ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 border-r-4 border-[#000]`}>
                                         {/* {row.hours[0]}hrs */}
                                     </td>
                                 ))}
                             </tr>
                             <tr className='border-b-2 border-[#2E263D1F]'>
                                 {[...Array(10)].map((_, index) => (
-                                    <td key={index} className={`text-center text-[#2E263DE5] h-[50px] text-sm custom-border ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 border-r-2 border-[#2E263D1F]`}>
+                                    <td key={index} className={`text-center text-[#2E263DE5] h-[50px] text-xs custom-border ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 border-r-2 border-[#2E263D1F]`}>
                                         {/* {row.hours[0]}hrs */}
                                     </td>
                                 ))}
