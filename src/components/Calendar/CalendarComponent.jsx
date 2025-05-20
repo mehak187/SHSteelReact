@@ -151,7 +151,7 @@ const CalendarComponent = () => {
                                 <td rowSpan={3} className={`text-start border-r border-[#00000021] ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 `}>
                                     <div>
                                         {row.manHours.map((hour, index) => (
-                                            <p key={index} className="border-b border-[#2E263D1F] p-2">
+                                            <p key={index} className="border-b border-[#2E263D1F] p-2 text-[#828280] text-sm">
                                                 {hour}
                                             </p>
                                         ))}
@@ -164,7 +164,7 @@ const CalendarComponent = () => {
                                                 <div key={index} className="border-b border-[#2E263D1F] p-2 flex items-center">
                                                     <div>
                                                         <img src={Eur} alt="" />
-                                                    </div>{tonnage}
+                                                    </div><p className='text-[#828280] text-sm'>{tonnage}</p>
                                                 </div>
                                             ))
                                         ) : (
@@ -192,7 +192,7 @@ const CalendarComponent = () => {
                                 <td rowSpan={3} className={`text-start border-r border-[#00000021] ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 `}>
                                     <div>
                                         {row.startDates.map((date, index) => (
-                                            <p key={index} className="border-b border-[#2E263D1F] p-2 text-nowrap">
+                                            <p key={index} className="border-b border-[#2E263D1F] text-[#828280] text-sm p-2 text-nowrap">
                                                 {date}
                                             </p>
                                         ))}
@@ -201,7 +201,7 @@ const CalendarComponent = () => {
                                 <td rowSpan={3} className={`text-start border-r border-[#00000021] ${rowIndex % 2 === 0 ? 'bg-[#F5F5F5]' : 'bg-white'} p-2 `}>
                                     <div>
                                         {row.durationWeeks.map((week, index) => (
-                                            <p key={index} className="border-b border-[#2E263D1F] p-2">
+                                            <p key={index} className="border-b border-[#2E263D1F] p-2 text-[#828280] text-sm">
                                                 {week}
                                             </p>
                                         ))}
