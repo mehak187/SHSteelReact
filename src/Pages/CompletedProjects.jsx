@@ -9,6 +9,7 @@ import DeleteIcon from "../components/customicons/DeleteIcon";
 import { LuEye } from "react-icons/lu";
 import IntegrationsIcon from "../components/customicons/ViewIcon";
 import AddPassword from "../components/AddPassword";
+import PageTitle from "../components/PageTitle";
 
 export default function CompletedProjects() {
   const [open, setOpen] = useState(false);
@@ -56,6 +57,7 @@ export default function CompletedProjects() {
   const tableRows = tabledata.map((item) => {
     return [
       <div>
+        <PageTitle title="Completed Projects"/>
         <input
           className="size-4 accent-[#88191F]"
           type="checkbox"

@@ -4,6 +4,7 @@ import { Modal } from "@mui/material";
 import TabComponent from "../components/TabComponent";
 import CalendarComponent from "../components/Calendar/CalendarComponent";
 import CapacityCalculator from "../components/Calendar/CapacityCalculator";
+import PageTitle from "../components/PageTitle";
 
 export default function Calendar() {
   const [open, setOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function Calendar() {
   ];
   return (
     <div>
+      <PageTitle title="Calendar"/>
       <div >
         <TabComponent tabs={tabData} />
       </div>

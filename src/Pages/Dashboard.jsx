@@ -5,6 +5,7 @@ import TotalProjects from "../assets/images/TotalProjects.png";
 import CompletedProjects from "../assets/images/CompletedProjects.png";
 import Table from "../components/Table";
 import dummyuser from "../assets/images/dummy-user.png";
+import PageTitle from "../components/PageTitle";
 
 export default function Dashboard() {
   const cards = [
@@ -137,6 +138,7 @@ export default function Dashboard() {
   });
   return (
     <div>
+      <PageTitle title="dashboard"/>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {cards.map((item, index) => (
           <div
