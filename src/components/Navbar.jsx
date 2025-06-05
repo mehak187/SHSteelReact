@@ -38,7 +38,7 @@ export default function Navbar() {
     { label: "Calendar", path: "/calendar" },
     { label: "Managers", path: "/managers" },
     { label: "Project Coordinators", path: "/projectcoordinators" },
-    { label: "Completed Projects", path: "/completedproject"}
+    { label: "Completed Projects", path: "/completedproject" }
   ];
   const NavLinks = () => (
     <div ref={navRef} className={`${shownav ? "block" : "hidden"} lg:block`}>
@@ -49,11 +49,10 @@ export default function Navbar() {
           <li key={index}>
             <Link
               to={item.path}
-              className={`p-2 border border-[#56565445] rounded-[5px] font-medium text-sm min-w-[100px] inline-flex lg:flex lg:items-center lg:justify-center text-nowrap ${
-                location.pathname.toLowerCase() === item.path.toLowerCase()
+              className={`p-2 border border-[#56565445] rounded-[5px] font-medium text-sm min-w-[100px] inline-flex lg:flex lg:items-center lg:justify-center text-nowrap ${location.pathname.toLowerCase() === item.path.toLowerCase()
                   ? "text-[#565654] bg-white lg:text-white lg:bg-[#565654]"
                   : "text-white bg-[#565654] lg:text-[#565654] lg:bg-white"
-              }`}
+                }`}
             >
               {item.label}
             </Link>
@@ -67,12 +66,11 @@ export default function Navbar() {
     <div className="bg-white relative z-20">
       <div className="mycontainer">
         <nav
-          className={`py-3 flex items-center gap-6 lg:gap-8 xl:gap-20 ${
-            shownotification && "relative"
-          }`}
+          className={`py-3 flex items-center gap-6 lg:gap-8 xl:gap-20 ${shownotification && "relative"
+            }`}
         >
           <div className="lg:max-w-[80px] max-w-[60px]">
-            <img src={logo} alt="Logo" />
+            <Link to='/dashboard'><img src={logo} alt="Logo" /></Link>
           </div>
           <div className="w-[calc(100%-250px)] flex items-center gap-6">
             <div>

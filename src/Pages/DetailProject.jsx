@@ -4,12 +4,15 @@ import { FaArrowLeft } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import OrderTable from '../components/DetailProject/OrderTable';
 import DaysTable from '../components/DetailProject/DaysTable';
+import PageTitle from '../components/PageTitle';
 
 const DetailProject = () => {
     const navigate = useNavigate();
     
     return (
+        
         <div>
+            <PageTitle title="Project Detail"/>
             <div className='bg-white shadow-md rounded-lg'>
                 <div className='grid lg:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-4 p-3'>
                     <div>

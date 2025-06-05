@@ -3,6 +3,7 @@ import Table from "../components/Table";
 import dummyuser from "../assets/images/dummy-user.png";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import AddCoordinator from "../components/coordinator/AddCoordinator";
+import PageTitle from "../components/PageTitle";
 
 export default function ProjectCoordinators() {
   const [open, setOpen] = useState(false);
@@ -93,6 +94,7 @@ export default function ProjectCoordinators() {
   });
   return (
     <div className="h-full">
+      <PageTitle title="Project Coordinate"/>
       <div className="bg-white rounded-[6px] overflow-hidden min-h-full shadow-[0px_4px_10px_0px_#2E263D33]">
         <div className="p-5 flex items-center gap-3 justify-between">
           <div className="ms-auto flex flex-wrap items-center gap-3">

@@ -3,6 +3,7 @@ import Table from "../components/Table";
 import dummyuser from "../assets/images/dummy-user.png";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import Addmanager from "../components/Manager/Addmanager";
+import PageTitle from "../components/PageTitle";
 
 export default function Managers() {
   const [open, setOpen] = useState(false);
@@ -85,6 +86,7 @@ export default function Managers() {
   });
   return (
     <div className="h-full">
+      <PageTitle title="Managers"/>
       <div className="bg-white rounded-[6px] overflow-hidden min-h-full shadow-[0px_4px_10px_0px_#2E263D33]">
         <div className="p-5">
           <div className="sm:flex justify-between items-center gap-3">
