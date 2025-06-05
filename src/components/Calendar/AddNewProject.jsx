@@ -174,7 +174,7 @@ export default function AddNewProject({ open, onOpenChange }) {
               type="reset"
               className="text-[#88191F] text-sm font-medium bg-white border border-[#88191F] rounded-[6px] py-2 px-4"
             >
-              Discard
+              Cancel
             </button>
           </div>
         </div>
