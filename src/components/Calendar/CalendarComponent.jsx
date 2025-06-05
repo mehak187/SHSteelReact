@@ -163,7 +163,7 @@ const CalendarComponent = () => {
                                             row.tonnage.map((tonnage, index) => (
                                                 <div key={index} className="border-b border-[#2E263D1F] p-2 flex items-center">
                                                     <div>
-                                                        <img src={Eur} alt="" className='w-[25px] object-contain' />
+                                                        {/* <img src={Eur} alt="" className='w-[25px] object-contain' /> */}
                                                     </div><p className='text-[#828280] text-xs'>{tonnage}</p>
                                                 </div>
                                             ))

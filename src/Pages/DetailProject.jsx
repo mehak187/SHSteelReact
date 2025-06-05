@@ -7,6 +7,7 @@ import DaysTable from '../components/DetailProject/DaysTable';
 
 const DetailProject = () => {
     const navigate = useNavigate();
+    
     return (
         <div>
             <div className='bg-white shadow-md rounded-lg'>

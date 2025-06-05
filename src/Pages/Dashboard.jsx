@@ -21,7 +21,7 @@ export default function Dashboard() {
       title: "Total Coordinators",
       value: "44",
       percent: "(+18%)",
-      endnote: "Last week analytics",
+      endnote: "Curent year analytics",
       type: "safe",
     },
     {
@@ -29,7 +29,7 @@ export default function Dashboard() {
       title: "Total Projects",
       value: "19",
       percent: "(-14%)",
-      endnote: "Last week analytics",
+      endnote: "Last year analytics",
       type: "danger",
     },
     {
@@ -37,7 +37,7 @@ export default function Dashboard() {
       title: "Completed Projects",
       value: "23",
       percent: "(+42%)",
-      endnote: "Last week analytics",
+      endnote: "Last months analytics",
       type: "safe",
     },
     {
@@ -50,7 +50,7 @@ export default function Dashboard() {
     },
   ];
 
-  const tableHeader = ["PROJECT", "TOTAL Hour", "PROGRESS", "Remaining HOURS"];
+  const tableHeader = ["PROJECT", "TOTAL Hour", "PROGRESS", "Remaining HOURS", "Remaining Pounds"];
   const tabledata = [
     {
       img: dummyuser,
@@ -59,6 +59,7 @@ export default function Dashboard() {
       totalhour: "122/240",
       percent: 20,
       remainingHour: "18:42",
+      remainingPound: "125",
     },
     {
       img: dummyuser,
@@ -67,6 +68,7 @@ export default function Dashboard() {
       totalhour: "9/56",
       percent: 40,
       remainingHour: "20:42",
+      remainingPound: "125",
     },
     {
       img: dummyuser,
@@ -75,6 +77,7 @@ export default function Dashboard() {
       totalhour: "122/240",
       percent: 60,
       remainingHour: "18:42",
+      remainingPound: "125",
     },
     {
       img: dummyuser,
@@ -83,6 +86,7 @@ export default function Dashboard() {
       totalhour: "9/56",
       percent: 80,
       remainingHour: "20:42",
+      remainingPound: "125",
     },
   ];
 
@@ -128,6 +132,7 @@ export default function Dashboard() {
         </div>
       </div>,
       <p>{item.remainingHour}</p>,
+      <p>{item.remainingPound}</p>,
     ];
   });
   return (

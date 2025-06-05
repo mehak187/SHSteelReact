@@ -98,7 +98,31 @@ const CapacityCalculator = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className='mt-10'>
+                    <div className='flex justify-between items-center mt-10'>
+                        <div>
+                            <h4 className='font-medium sm:text-3xl text-xl'>Miscellaneous Calculator</h4>
+                        </div>
+                        <div>
+                            <button
+                                onClick={handlemodalopen}
+                                className="text-white text-sm font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-2 shadow-[0px_2px_4px_0px_#2E263D29]"
+                            >
+                                <img src={EditImg} alt="" className='size-5' />
+                            </button>
+                            <Modal
+                                open={modalopen}
+                                onClose={handlemodalclose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                                sx={{ m: 2 }}
+                            >
+                                <div className="absolute top-1/2 left-1/2 -translate-1/2 w-full max-w-[500px] outline-0">
+                                    <EditCapacityCalculator />
+                                </div>
+                            </Modal>
+                        </div>
+                    </div>
+                    <div className='mt-5'>
                         <table className='w-full'>
                             <thead>
                                 <tr className='border-b-4 border-[#000]'>
@@ -154,9 +178,9 @@ const CapacityCalculator = () => {
                                     </td>
                                     <td className={`text-center p-3 text-[#828280] bg-white inset-shadow-sm ${row.label === "Total" ? "border-t-4 border-[#000]" : ""}`}>
                                         <div className='flex items-center gap-2'>
-                                            <div>
+                                            {/* <div>
                                                 <img src={Eur} alt="" className='w-[20px] object-contain'/>
-                                            </div>
+                                            </div> */}
                                             {row.emp || "------"}
                                         </div>
                                     </td>
@@ -179,9 +203,9 @@ const CapacityCalculator = () => {
                                     </td>
                                     <td className={`text-center p-3 text-[#828280] bg-white inset-shadow-sm ${row.label === "Total" ? "border-t-4 border-[#000]" : ""}`}>
                                         <div className='flex items-center gap-2'>
-                                            <div>
+                                            {/* <div>
                                                 <img src={Eur} alt="" className='w-[20px] object-contain'/>
-                                            </div>
+                                            </div> */}
                                             {row.emp || "------"}
                                         </div>
                                     </td>

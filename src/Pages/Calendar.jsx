@@ -9,13 +9,13 @@ export default function Calendar() {
   const [open, setOpen] = useState(false);
 
   const tabData = [
-    { label: "Calendar", content: <CalendarComponent/> },
-    { label: "Capacity Calculator", content: <CapacityCalculator/> },
+    { label: "Calendar", content: <CalendarComponent /> },
+    { label: "Capacity Calculator", content: <CapacityCalculator /> },
   ];
   return (
     <div>
       <div >
-          <TabComponent tabs={tabData} />
+        <TabComponent tabs={tabData} />
       </div>
       <AddNewProject open={open} onOpenChange={setOpen} />
     </div>
