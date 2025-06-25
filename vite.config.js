@@ -8,4 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    historyApiFallback: true, // 👈 handles client-side routes
+  },
 })
