@@ -29,7 +29,6 @@ const Login = () => {
       localStorage.setItem("authUser", JSON.stringify(user));
       navigate("/dashboard");
     } catch (error) {
-      console.error(error);
       setErrorMsg("Invalid email or password");
     }
   };

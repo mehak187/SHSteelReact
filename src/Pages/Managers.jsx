@@ -22,7 +22,6 @@ export default function Managers() {
       });
       setManagers(response.data);
     } catch (error) {
-      console.error("Failed to fetch managers:", error);
       toast.error("Error fetching managers");
     }
   };
@@ -42,13 +41,11 @@ export default function Managers() {
       toast.success("Manager deleted successfully");
       fetchManagers(); // Refresh list
     } catch (error) {
-      console.error("Delete error:", error);
       toast.error("Failed to delete manager");
     }
   };
 
   const handleEdit = (manager) => {
-    console.log("Editing manager:", manager);
     setEditUser(manager);
     setOpen(true);
   };

@@ -11,20 +11,20 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
     name: "",
     email: "",
     password: "",
+    status: "1",
   });
 
   const [loading, setLoading] = React.useState(false);
-
-  // Update form when edituser changes
   React.useEffect(() => {
     if (isEditMode) {
       setForm({
         name: edituser.name || "",
         email: edituser.email || "",
-        password: "", // for security, don’t pre-fill password
+        password: "",
+        status: edituser.status?.toString() || "1",
       });
     } else {
-      setForm({ name: "", email: "", password: "" });
+      setForm({ name: "", email: "", password: "", status: "1" });
     }
   }, [edituser, open]);
 
@@ -39,13 +39,13 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
 
     try {
       if (isEditMode) {
-        // 🔁 UPDATE
-        await authAxios.put(
-          `/managers/${edituser.id}`,
+        await authAxios.post(
+          `/updateManager/${edituser.id}`,
           {
             name: form.name,
             email: form.email,
-            ...(form.password && { password: form.password }), // only send if provided
+            ...(form.password && { password: form.password }),
+            status: form.status,
           },
           {
             headers: {
@@ -55,7 +55,6 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
         );
         toast.success("Manager updated successfully!");
       } else {
-        // 🆕 CREATE
         await authAxios.post(
           "/createManager",
           {
@@ -72,20 +71,17 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
         toast.success("Manager added successfully!");
       }
 
-      onOpenChange(false); // Close drawer
-      setForm({ name: "", email: "", password: "" });
+      onOpenChange(false);
+      setForm({ name: "", email: "", password: "", status: "1" });
     } catch (error) {
-      console.error("Submit error:", error);
-      toast.error(
-        error?.response?.data?.message || "Something went wrong"
-      );
+      toast.error(error?.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
   const handleDiscard = () => {
-    setForm({ name: "", email: "", password: "" });
+    setForm({ name: "", email: "", password: "", status: "1" });
     onOpenChange(false);
   };
 
@@ -102,7 +98,6 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
       onClose={() => onOpenChange(false)}
     >
       <div className="h-full flex flex-col justify-between">
-        {/* Header */}
         <div className="flex items-center justify-between p-3 border-b border-[#2E263D1F]">
           <p className="text-lg font-medium text-[#2E263DE5]">
             {isEditMode ? "Edit Manager" : "Add New Manager"}
@@ -112,7 +107,6 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
           </button>
         </div>
 
-        {/* Form */}
         <div className="p-2 m-1 h-[calc(100%-120px)] overflow-y-auto">
           <div className="flex flex-col gap-4">
             <input
@@ -139,10 +133,20 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
               placeholder={isEditMode ? "New Password (optional)" : "Password"}
               className="border rounded-[6px] block w-full p-3 text-sm border-[#2E263D38] placeholder:text-[#2E263D66]"
             />
+            {isEditMode && (
+              <select
+                name="status"
+                value={form.status}
+                onChange={handleChange}
+                className="border rounded-[6px] block w-full p-3 text-sm border-[#2E263D38] text-[#2E263D] placeholder:text-[#2E263D66]"
+              >
+                <option value="1">Active</option>
+                <option value="2">Inactive</option>
+              </select>
+            )}
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="p-3 flex items-center gap-3">
           <button
             type="button"
@@ -150,7 +154,13 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
             disabled={loading}
             className="text-white text-sm font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-4 shadow-[0px_2px_4px_0px_#2E263D29]"
           >
-            {loading ? (isEditMode ? "Updating..." : "Adding...") : isEditMode ? "Update" : "Add"}
+            {loading
+              ? isEditMode
+                ? "Updating..."
+                : "Adding..."
+              : isEditMode
+              ? "Update"
+              : "Add"}
           </button>
           <button
             type="button"
