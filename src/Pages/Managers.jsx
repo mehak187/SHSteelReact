@@ -12,6 +12,8 @@ export default function Managers() {
   const [open, setOpen] = useState(false);
   const [managers, setManagers] = useState([]);
   const [edituser, setEditUser] = useState(null);
+    const [search, setSearch] = useState("");
+  
   const fetchManagers = async () => {
     try {
       const token = localStorage.getItem("authToken");
@@ -51,8 +53,10 @@ export default function Managers() {
   };
 
   const tableHeader = ["", "No", "Date", "Manager Name", "Status", "Action"];
-
-  const tableRows = managers.map((item, index) => {
+  const filteredManagers = managers.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
+  );
+  const tableRows = filteredManagers.map((item, index) => {
     const createdAt = new Date(item.created_at);
     const date = createdAt.toLocaleDateString();
     const time = createdAt.toLocaleTimeString([], {
@@ -115,6 +119,8 @@ export default function Managers() {
                 className="border border-[#2E263D38] p-2 outline-0 text-sm rounded-[6px] w-full"
                 placeholder="Search Manager"
                 type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
             <div className="flex justify-end sm:mt-0 mt-3">
