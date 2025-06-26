@@ -125,14 +125,6 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
               placeholder="Manager Email"
               className="border rounded-[6px] block w-full p-3 text-sm border-[#2E263D38] placeholder:text-[#2E263D66]"
             />
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder={isEditMode ? "New Password (optional)" : "Password"}
-              className="border rounded-[6px] block w-full p-3 text-sm border-[#2E263D38] placeholder:text-[#2E263D66]"
-            />
             {isEditMode && (
               <select
                 name="status"
@@ -144,6 +136,14 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
                 <option value="2">Inactive</option>
               </select>
             )}
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder={isEditMode ? "New Password (optional)" : "Password"}
+              className="border rounded-[6px] block w-full p-3 text-sm border-[#2E263D38] placeholder:text-[#2E263D66]"
+            />
           </div>
         </div>
 
