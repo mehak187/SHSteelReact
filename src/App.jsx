@@ -10,6 +10,7 @@ import Login from "./Pages/Auth/Login";
 import CompletedProjects from "./Pages/CompletedProjects";
 import DetailProject from "./Pages/DetailProject";
 import { Toaster } from 'react-hot-toast';
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -17,15 +18,17 @@ function App() {
       <Toaster position="top-right" />
       <Routes>
         <Route element={<AuthLayout />}>
-          <Route element={<Login/>} path="/" />
+          <Route element={<Login />} path="/" />
         </Route>
-        <Route element={<UserLayout />}>
-          <Route element={<Dashboard />} path="/dashboard" />
-          <Route element={<Calendar />} path="/calendar" />
-          <Route element={<Managers />} path="/managers" />
-          <Route element={<ProjectCoordinators />} path="/projectcoordinators" />
-          <Route element={<CompletedProjects/>} path="/completedproject" />
-          <Route element={<DetailProject/>} path="/detail" />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<UserLayout />}>
+            <Route element={<Dashboard />} path="/dashboard" />
+            <Route element={<Calendar />} path="/calendar" />
+            <Route element={<Managers />} path="/managers" />
+            <Route element={<ProjectCoordinators />} path="/projectcoordinators" />
+            <Route element={<CompletedProjects />} path="/completedproject" />
+            <Route element={<DetailProject />} path="/detail" />
+          </Route>
         </Route>
       </Routes>
     </Router>
