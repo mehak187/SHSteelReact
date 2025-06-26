@@ -9,10 +9,12 @@ import AuthLayout from "./layouts/AuthLayout";
 import Login from "./Pages/Auth/Login";
 import CompletedProjects from "./Pages/CompletedProjects";
 import DetailProject from "./Pages/DetailProject";
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <Router>
+      <Toaster position="top-right" />
       <Routes>
         <Route element={<AuthLayout />}>
           <Route element={<Login/>} path="/" />

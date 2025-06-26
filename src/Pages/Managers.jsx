@@ -1,102 +1,123 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "../components/Table";
 import dummyuser from "../assets/images/dummy-user.png";
-import { FaEllipsisVertical } from "react-icons/fa6";
+import { FaRegTrashCan } from "react-icons/fa6";
 import Addmanager from "../components/Manager/Addmanager";
 import PageTitle from "../components/PageTitle";
+import authAxios from "../axios/auth";
+import toast from "react-hot-toast";
+import { FaRegEdit } from "react-icons/fa";
 
 export default function Managers() {
   const [open, setOpen] = useState(false);
+  const [managers, setManagers] = useState([]);
+  const [edituser, setEditUser] = useState(null);
+  const fetchManagers = async () => {
+    try {
+      const token = localStorage.getItem("authToken");
+      const response = await authAxios.get("/managers", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setManagers(response.data);
+    } catch (error) {
+      console.error("Failed to fetch managers:", error);
+      toast.error("Error fetching managers");
+    }
+  };
 
-  const tableHeader = ["", "No", "date", "Manager Name", "status", "Action"];
-  const tabledata = [
-    {
-      no: "#6979",
-      date: "Apr 15, 2023",
-      time: "10:21",
-      img: dummyuser,
-      name: "Orangewood",
-      email: "ceasomw@theguardian.com",
-      status: "Active",
-    },
-    {
-      no: "#6979",
-      date: "Apr 15, 2023",
-      time: "10:21",
-      img: dummyuser,
-      name: "Findlay Hyundai Prescott",
-      email: "ceasomw@theguardian.com",
-      status: "Active",
-    },
-    {
-      no: "#6979",
-      date: "Apr 15, 2023",
-      time: "10:21",
-      img: dummyuser,
-      name: "Orangewood",
-      email: "ceasomw@theguardian.com",
-      status: "Active",
-    },
-    {
-      no: "#6979",
-      date: "Apr 15, 2023",
-      time: "10:21",
-      img: dummyuser,
-      name: "Findlay Hyundai Prescott",
-      email: "ceasomw@theguardian.com",
-      status: "Not Active",
-    },
-  ];
+  useEffect(() => {
+    fetchManagers();
+  }, []);
+  const handleDelete = async (id) => {
+    try {
+      const token = localStorage.getItem("authToken");
+      await authAxios.delete(`/deleteManager/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  const tableRows = tabledata.map((item) => {
+      toast.success("Manager deleted successfully");
+      fetchManagers(); // Refresh list
+    } catch (error) {
+      console.error("Delete error:", error);
+      toast.error("Failed to delete manager");
+    }
+  };
+
+  const handleEdit = (manager) => {
+    console.log("Editing manager:", manager);
+    setEditUser(manager);
+    setOpen(true);
+  };
+
+  const tableHeader = ["", "No", "Date", "Manager Name", "Status", "Action"];
+
+  const tableRows = managers.map((item, index) => {
+    const createdAt = new Date(item.created_at);
+    const date = createdAt.toLocaleDateString();
+    const time = createdAt.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
     return [
       <div>
-        <input
-          className="size-4 accent-[#88191F]"
-          type="checkbox"
-          name=""
-          id=""
-        />
+        <input className="size-4 accent-[#88191F]" type="checkbox" />
       </div>,
-      <p className="text-[#8C57FF]">{item.no}</p>,
+      <p className="text-[#8C57FF]">#{item.id}</p>,
       <p className="text-[#2E263DB2]">
-        {item.date}, {item.time}
+        {date}, {time}
       </p>,
       <div className="flex items-center gap-2">
-        <img className="size-8 max-w-8 rounded-full" src={item.img} alt="img" />
+        <img
+          className="size-8 max-w-8 rounded-full"
+          src={dummyuser}
+          alt="img"
+        />
         <div>
           <p className="font-medium text-sm text-[#2E263DE5]">{item.name}</p>
           <p className="text-sm text-[#2E263DB2]">{item.email}</p>
         </div>
       </div>,
       <p
-        className={`inline-block text-xs py-1 px-3 rounded-full ${item.status === "Active"
+        className={`inline-block text-xs py-1 px-3 rounded-full ${
+          item.status == 1
             ? "text-[#56CA00] bg-[#56CA0029]"
             : "text-[#8C57FF] bg-[#8C57FF29]"
-          }`}
+        }`}
       >
-        {item.status}
+        {item.status == 1 ? "Active" : "Not Active"}
       </p>,
-      <div>
-        <button>
-          <FaEllipsisVertical />
+      <div className="flex items-center gap-2">
+        <button onClick={() => handleDelete(item.id)}>
+          <FaRegTrashCan className="text-[16px]" />
+        </button>
+        <button
+          onClick={() => {
+            setOpen(true);
+            handleEdit(item);
+          }}
+        >
+          <FaRegEdit className="text-[16px]" />
         </button>
       </div>,
     ];
   });
+
   return (
     <div className="h-full">
-      <PageTitle title="Managers"/>
+      <PageTitle title="Managers" />
       <div className="bg-white rounded-[6px] overflow-hidden min-h-full shadow-[0px_4px_10px_0px_#2E263D33]">
         <div className="p-5">
           <div className="sm:flex justify-between items-center gap-3">
             <div>
               <input
                 className="border border-[#2E263D38] p-2 outline-0 text-sm rounded-[6px] w-full"
-                placeholder="Search Project"
+                placeholder="Search Manager"
                 type="search"
-                name="searchProject"
-                id="searchProject"
               />
             </div>
             <div className="flex justify-end sm:mt-0 mt-3">
@@ -113,7 +134,15 @@ export default function Managers() {
           <Table rows={tableRows} headers={tableHeader} />
         </div>
       </div>
-      <Addmanager open={open} onOpenChange={setOpen} />
+      <Addmanager
+        edituser={edituser}
+        open={open}
+        onOpenChange={(isOpen) => {
+          setOpen(isOpen);
+          if (!isOpen) fetchManagers();
+          setEditUser(null); // Refresh list after closing drawer
+        }}
+      />
     </div>
   );
 }
