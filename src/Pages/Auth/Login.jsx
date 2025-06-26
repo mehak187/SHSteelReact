@@ -10,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
-
+  const [loading, setLoading] = React.useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -18,6 +18,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
+    setLoading(true);
 
     try {
       const response = await authAxios.post("/login", {
@@ -98,9 +99,10 @@ const Login = () => {
         <div className="mt-9">
           <button
             type="submit"
+            disabled={loading}
             className="bg-[#88191F] text-white px-4 py-2 rounded-sm w-full text-medium text-sm"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </div>
       </form>
