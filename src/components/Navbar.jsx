@@ -3,10 +3,10 @@ import { FaRegBell, FaRegUser } from "react-icons/fa";
 import logo from "../assets/images/Logo.jpg";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaXmark } from "react-icons/fa6";
-import dummyuser from "../assets/images/dummy-user.png";
 import { PiBellBold } from "react-icons/pi";
 import { IoSearch } from "react-icons/io5";
 import Notifications from "./Notifications";
+import UserDropdown from "../components/UserDropdown";
 
 export default function Navbar() {
   const [shownav, setshownav] = useState(false);
@@ -97,7 +97,7 @@ export default function Navbar() {
                 className={`size-3 absolute rounded-full border-3 border-[#F4F5FA] bg-[#FF4C51] top-[-6px] right-0`}
               ></div>
             </button>
-            <button className="rounded-full w-max relative">
+            {/* <button className="rounded-full w-max relative">
               <img
                 className="size-10 max-w-10 rounded-full"
                 src={dummyuser}
@@ -106,7 +106,8 @@ export default function Navbar() {
               <div
                 className={`size-3 absolute rounded-full border-3 border-[#F4F5FA] bg-[#56CA00] bottom-0 right-0`}
               ></div>
-            </button>
+            </button> */}
+            <UserDropdown/>
             <button
               onClick={() => setshownav((prev) => !prev)}
               className="lg:hidden"
