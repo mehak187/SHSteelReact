@@ -12,6 +12,7 @@ import DetailProject from "./Pages/DetailProject";
 import { Toaster } from 'react-hot-toast';
 import ProtectedRoute from "./components/ProtectedRoute";
 import Forgot from "./Pages/Auth/Forgot";
+import ResetPassword from "./Pages/Auth/ResetPassword";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route element={<AuthLayout />}>
           <Route element={<Login />} path="/" />
           <Route element={<Forgot />} path="/Forgot" />
+          <Route element={<ResetPassword />} path="/ResetPassword" />
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route element={<UserLayout />}>
