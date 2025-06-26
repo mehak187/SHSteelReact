@@ -153,7 +153,13 @@ export default function AddCoordinator({ open, onOpenChange, edituser }) {
             disabled={loading}
             className="text-white text-sm font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-4 shadow-[0px_2px_4px_0px_#2E263D29]"
           >
-            {loading ? (isEditMode ? "Updating..." : "Adding...") : isEditMode ? "Update" : "Add"}
+            {loading
+              ? isEditMode
+                ? "Updating..."
+                : "Adding..."
+              : isEditMode
+              ? "Update"
+              : "Add"}
           </button>
           <button
             type="button"

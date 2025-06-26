@@ -90,7 +90,7 @@ const Login = () => {
             <input type="checkbox" className="accent-[#88191F] text-[15px]" />
             <label className="text-[var(--primary)]">Remember me</label>
           </div>
-          <Link to="" className="text-[#88191F] font-normal text-[15px]">
+          <Link to="/Forgot" className="text-[#88191F] font-normal text-[15px]">
             Forgot Password?
           </Link>
         </div>

@@ -11,6 +11,7 @@ import CompletedProjects from "./Pages/CompletedProjects";
 import DetailProject from "./Pages/DetailProject";
 import { Toaster } from 'react-hot-toast';
 import ProtectedRoute from "./components/ProtectedRoute";
+import Forgot from "./Pages/Auth/Forgot";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route element={<AuthLayout />}>
           <Route element={<Login />} path="/" />
+          <Route element={<Forgot />} path="/Forgot" />
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route element={<UserLayout />}>
