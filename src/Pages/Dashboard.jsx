@@ -51,7 +51,13 @@ export default function Dashboard() {
     },
   ];
 
-  const tableHeader = ["PROJECT", "TOTAL Hour", "PROGRESS", "Remaining HOURS", "Remaining Pounds"];
+  const tableHeader = [
+    "PROJECT",
+    "TOTAL Hour",
+    "PROGRESS",
+    "Remaining HOURS",
+    "Remaining Pounds",
+  ];
   const tabledata = [
     {
       img: dummyuser,
@@ -138,7 +144,7 @@ export default function Dashboard() {
   });
   return (
     <div>
-      <PageTitle title="dashboard"/>
+      <PageTitle title="dashboard" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {cards.map((item, index) => (
           <div
@@ -172,7 +178,7 @@ export default function Dashboard() {
       <div className="mt-6 bg-white rounded-[6px] overflow-hidden shadow-[0px_4px_10px_0px_#2E263D33] lg:w-4/5">
         <div className="p-5 sm:flex items-center gap-3 justify-between">
           <div>
-          <p className="font-medium text-lg text-[#2E263DE5]">Project List</p>
+            <p className="font-medium text-lg text-[#2E263DE5]">Project List</p>
           </div>
           <div className="flex justify-end sm:mt-0 mt-3">
             <input

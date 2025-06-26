@@ -12,8 +12,8 @@ export default function Managers() {
   const [open, setOpen] = useState(false);
   const [managers, setManagers] = useState([]);
   const [edituser, setEditUser] = useState(null);
-    const [search, setSearch] = useState("");
-  
+  const [search, setSearch] = useState("");
+
   const fetchManagers = async () => {
     try {
       const token = localStorage.getItem("authToken");
@@ -41,7 +41,7 @@ export default function Managers() {
       });
 
       toast.success("Manager deleted successfully");
-      fetchManagers(); // Refresh list
+      fetchManagers();
     } catch (error) {
       toast.error("Failed to delete manager");
     }
@@ -143,7 +143,7 @@ export default function Managers() {
         onOpenChange={(isOpen) => {
           setOpen(isOpen);
           if (!isOpen) fetchManagers();
-          setEditUser(null); // Refresh list after closing drawer
+          setEditUser(null);
         }}
       />
     </div>

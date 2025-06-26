@@ -5,7 +5,7 @@ const PageTitle = ({ title }) => {
     document.title = title;
   }, [title]);
 
-  return null; // This component doesn’t render anything visible
+  return null;
 };
 
 export default PageTitle;

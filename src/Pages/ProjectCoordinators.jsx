@@ -52,7 +52,14 @@ export default function ProjectCoordinators() {
     setOpen(true);
   };
 
-  const tableHeader = ["", "No", "Date", "Coordinator Name", "Status", "Action"];
+  const tableHeader = [
+    "",
+    "No",
+    "Date",
+    "Coordinator Name",
+    "Status",
+    "Action",
+  ];
 
   const filteredCoordinators = coordinators.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
@@ -70,7 +77,9 @@ export default function ProjectCoordinators() {
       <div key={`check-${item.id}`}>
         <input className="size-4 accent-[#88191F]" type="checkbox" />
       </div>,
-      <p key={`id-${item.id}`} className="text-[#8C57FF]">#{item.id}</p>,
+      <p key={`id-${item.id}`} className="text-[#8C57FF]">
+        #{item.id}
+      </p>,
       <p key={`date-${item.id}`} className="text-[#2E263DB2]">
         {date}, {time}
       </p>,

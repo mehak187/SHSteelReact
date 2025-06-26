@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../assets/images/Logo.jpg";
 import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
-import authAxios from "../../axios/auth"; // adjust path if needed
+import authAxios from "../../axios/auth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);

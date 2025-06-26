@@ -6,8 +6,8 @@ import Logo from "../../assets/images/Logo.jpg";
 
 const ResetPassword = () => {
   const [params] = useSearchParams();
-  const token = params.get("token"); // ?token=xxxx
-  const email = params.get("email"); // ?email=xxxx
+  const token = params.get("token");
+  const email = params.get("email");
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -37,7 +37,7 @@ const ResetPassword = () => {
       });
 
       toast.success("Password reset successfully!");
-      navigate("/"); // Redirect to login
+      navigate("/");
     } catch (error) {
       const message =
         error?.response?.data?.message || "Something went wrong. Try again.";

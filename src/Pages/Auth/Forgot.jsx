@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../assets/images/Logo.jpg";
 import { useNavigate } from "react-router-dom";
 import authAxios from "../../axios/auth";
-import toast from "react-hot-toast"; // optional but improves UX
+import toast from "react-hot-toast";
 
 const Forgot = () => {
   const [email, setEmail] = useState("");
@@ -19,15 +19,15 @@ const Forgot = () => {
       const response = await authAxios.post("/forgot-password", { email });
 
       toast.success("Reset link sent to your email");
-      setEmail(""); // Clear field
+      setEmail("");
 
-      // Optionally redirect to login or confirmation screen
       navigate("/", { state: { email } });
     } catch (error) {
       console.error("Error:", error);
 
       const message =
-        error?.response?.data?.message || "An error occurred. Please try again.";
+        error?.response?.data?.message ||
+        "An error occurred. Please try again.";
       setErrorMsg(message);
       toast.error(message);
     }

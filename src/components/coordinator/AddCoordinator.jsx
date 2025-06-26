@@ -10,7 +10,7 @@ export default function AddCoordinator({ open, onOpenChange, edituser }) {
   const [form, setForm] = React.useState({
     name: "",
     email: "",
-    status: "1", // default active
+    status: "1",
   });
 
   const [loading, setLoading] = React.useState(false);

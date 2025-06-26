@@ -1,6 +1,6 @@
 import { Menu } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
-import authAxios from "../axios/auth"; // adjust path if needed
+import authAxios from "../axios/auth";
 import toast from "react-hot-toast";
 import dummyuser from "../assets/images/dummy-user.png";
 

@@ -4,7 +4,7 @@ import { FaXmark } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 export default function AddPassword({ open, onOpenChange }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div>
       <Modal
@@ -17,7 +17,7 @@ export default function AddPassword({ open, onOpenChange }) {
           <div className="h-full flex flex-col justify-between">
             <div className="flex items-center gap-2 justify-between p-3 border-b border-[#2E263D1F]">
               <p className="text-lg font-medium text-[#2E263DE5]">
-              Enter the Project Manager  Password
+                Enter the Project Manager Password
               </p>
             </div>
             <div className="p-2 m-1 h-[calc(100%-120px)] overflow-y-auto">
@@ -35,7 +35,8 @@ export default function AddPassword({ open, onOpenChange }) {
             </div>
             <div className="p-3 flex items-center gap-3">
               <button
-                type="button" onClick={() => navigate("/detail")}
+                type="button"
+                onClick={() => navigate("/detail")}
                 className="text-white text-sm font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-4 shadow-[0px_2px_4px_0px_#2E263D29]"
               >
                 Continue

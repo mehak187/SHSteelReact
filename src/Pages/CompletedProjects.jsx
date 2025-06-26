@@ -57,7 +57,7 @@ export default function CompletedProjects() {
   const tableRows = tabledata.map((item) => {
     return [
       <div>
-        <PageTitle title="Completed Projects"/>
+        <PageTitle title="Completed Projects" />
         <input
           className="size-4 accent-[#88191F]"
           type="checkbox"
@@ -77,31 +77,32 @@ export default function CompletedProjects() {
         </div>
       </div>,
       <p
-        className={`inline-block text-xs py-1 px-3 rounded-full ${item.status === "Active"
+        className={`inline-block text-xs py-1 px-3 rounded-full ${
+          item.status === "Active"
             ? "text-[#56CA00] bg-[#56CA0029]"
             : "text-[#8C57FF] bg-[#8C57FF29]"
-          }`}
+        }`}
       >
         {item.status}
       </p>,
       <div>
-         <Actions
-        list={[
-          {
-            icon: EditIcon,
-            label: "Edit",
-          },
-          {
-            icon: DeleteIcon,
-            label: "Delete",
-          },
-          {
-            icon: IntegrationsIcon,
-            label: "View",
-            onClick: () => setOpen(true)
-          },
-        ]}
-      />
+        <Actions
+          list={[
+            {
+              icon: EditIcon,
+              label: "Edit",
+            },
+            {
+              icon: DeleteIcon,
+              label: "Delete",
+            },
+            {
+              icon: IntegrationsIcon,
+              label: "View",
+              onClick: () => setOpen(true),
+            },
+          ]}
+        />
       </div>,
     ];
   });
