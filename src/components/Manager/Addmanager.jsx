@@ -3,6 +3,7 @@ import Drawer from "@mui/material/Drawer";
 import { FaXmark } from "react-icons/fa6";
 import authAxios from "../../axios/auth";
 import toast from "react-hot-toast";
+import Spinner from "../Spinner";
 
 export default function Addmanager({ open, onOpenChange, edituser }) {
   const isEditMode = !!edituser;
@@ -154,13 +155,16 @@ export default function Addmanager({ open, onOpenChange, edituser }) {
             disabled={loading}
             className="text-white text-sm font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-4 shadow-[0px_2px_4px_0px_#2E263D29]"
           >
-            {loading
-              ? isEditMode
-                ? "Updating..."
-                : "Adding..."
-              : isEditMode
-              ? "Update"
-              : "Add"}
+            {loading ? (
+              <div className="flex justify-center items-center gap-2">
+                {isEditMode ? "Updating" : "Adding"}
+                <Spinner />
+              </div>
+            ) : isEditMode ? (
+              "Update"
+            ) : (
+              "Add"
+            )}
           </button>
           <button
             type="button"

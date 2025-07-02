@@ -3,6 +3,7 @@ import Logo from "../../assets/images/Logo.jpg";
 import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import authAxios from "../../axios/auth";
+import Spinner from "../../components/Spinner";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -102,7 +103,14 @@ const Login = () => {
             disabled={loading}
             className="bg-[#88191F] text-white px-4 py-2 rounded-sm w-full text-medium text-sm"
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? (
+              <div className="flex justify-center items-center gap-2">
+                Login
+                <Spinner />
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
         </div>
       </form>
