@@ -9,12 +9,11 @@ export default function WritePercentage({ open, onOpenChange }) {
     <div>
       <Modal
         open={open}
-        onClose={() => onOpenChange(false)}
+        onClose={onOpenChange}
         aria-labelledby="add-manager-modal"
         aria-describedby="modal-to-add-new-manager"
       >
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white w-full max-w-[450px]">
-          <form action="">
           <div className="h-full flex flex-col justify-between">
             <div className="flex items-center gap-2 justify-between p-3 border-b border-[#2E263D1F]">
               <p className="text-lg font-medium text-[#000]">
@@ -36,20 +35,19 @@ export default function WritePercentage({ open, onOpenChange }) {
             </div>
             <div className="p-3 flex items-center gap-3">
               <button
-                type="submit"
+                onClick={onOpenChange}
                 className="text-white text-sm font-medium bg-[#88191F] border border-[#88191F] rounded-[6px] py-2 px-4 shadow-[0px_2px_4px_0px_#2E263D29]"
               >
                 Continue
               </button>
               <button
-                type="reset"
+                onClick={onOpenChange}
                 className="text-[#88191F] text-sm font-medium bg-white border border-[#88191F] rounded-[6px] py-2 px-4"
               >
                 Cancel
               </button>
             </div>
           </div>
-          </form>
         </div>
       </Modal>
     </div>

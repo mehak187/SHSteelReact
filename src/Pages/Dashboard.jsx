@@ -6,6 +6,7 @@ import CompletedProjects from "../assets/images/CompletedProjects.png";
 import Table from "../components/Table";
 import dummyuser from "../assets/images/dummy-user.png";
 import PageTitle from "../components/PageTitle";
+import TableMui from "../components/mui/TableMui";
 
 export default function Dashboard() {
   const cards = [
@@ -51,7 +52,6 @@ export default function Dashboard() {
     },
   ];
 
-  const tableHeader = ["PROJECT", "TOTAL Hour", "PROGRESS", "Remaining HOURS", "Remaining Pounds"];
   const tabledata = [
     {
       img: dummyuser,
@@ -91,54 +91,9 @@ export default function Dashboard() {
     },
   ];
 
-  const tableRows = tabledata.map((item) => {
-    return [
-      <div className="flex items-center gap-2">
-        <img className="size-8 max-w-8 rounded-full" src={item.img} alt="img" />
-        <div>
-          <p className="font-medium text-sm text-[#2E263DE5]">{item.name}</p>
-          <p className="text-sm text-[#2E263DB2]">{item.date}</p>
-        </div>
-      </div>,
-      <p className="text-[#2E263DB2]">{item.totalhour}</p>,
-      <div>
-        <p className="text-[#2E263DB2]">{item.percent}%</p>
-        <div
-          className={`w-full h-2 rounded-full mt-1 ${
-            item.percent < 25
-              ? "bg-[#FF4C5129]"
-              : item.percent >= 25 && item.percent < 50
-              ? "bg-[#FFB40029]"
-              : item.percent >= 50 && item.percent < 75
-              ? "bg-[#8C57FF29]"
-              : item.percent >= 75
-              ? "bg-[#56CA0029]"
-              : ""
-          }`}
-        >
-          <div
-            className={`h-full bg-[#2E263D] rounded-full ${
-              item.percent < 25
-                ? "bg-[#FF4C51]"
-                : item.percent >= 25 && item.percent < 50
-                ? "bg-[#FFB400]"
-                : item.percent >= 50 && item.percent < 75
-                ? "bg-[#8C57FF]"
-                : item.percent >= 75
-                ? "bg-[#56CA00]"
-                : ""
-            }`}
-            style={{ width: `${item.percent}%` }}
-          ></div>
-        </div>
-      </div>,
-      <p>{item.remainingHour}</p>,
-      <p>{item.remainingPound}</p>,
-    ];
-  });
   return (
     <div>
-      <PageTitle title="dashboard"/>
+      <PageTitle title="dashboard" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {cards.map((item, index) => (
           <div
@@ -172,7 +127,7 @@ export default function Dashboard() {
       <div className="mt-6 bg-white rounded-[6px] overflow-hidden shadow-[0px_4px_10px_0px_#2E263D33] lg:w-4/5">
         <div className="p-5 sm:flex items-center gap-3 justify-between">
           <div>
-          <p className="font-medium text-lg text-[#2E263DE5]">Project List</p>
+            <p className="font-medium text-lg text-[#2E263DE5]">Project List</p>
           </div>
           <div className="flex justify-end sm:mt-0 mt-3">
             <input
@@ -185,7 +140,89 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="pb-2">
-          <Table rows={tableRows} headers={tableHeader} />
+          <TableMui
+            loading={false}
+            th={{
+              name: "PROJECT",
+              totalhour: "TOTAL Hour",
+              percent: "PROGRESS",
+              remainingHour: "Remaining HOURS",
+              remainingPound: "Remaining Pounds",
+            }}
+            td={tabledata || []}
+            customFields={[
+              {
+                name: "name",
+                data: (value, data) => (
+                  <div className="flex items-center gap-2">
+                    <img
+                      className="size-8 max-w-8 rounded-full"
+                      src={data.img}
+                      alt="img"
+                    />
+                    <div>
+                      <p className="font-medium text-sm text-[#2E263DE5]">
+                        {data.name}
+                      </p>
+                      <p className="text-sm text-[#2E263DB2]">{data.date}</p>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                name: "percent",
+                data: (value, item) => (
+                  <div>
+                    <p className="text-[#2E263DB2]">{item.percent}%</p>
+                    <div
+                      className={`w-full h-2 rounded-full mt-1 ${
+                        item.percent < 25
+                          ? "bg-[#FF4C5129]"
+                          : item.percent >= 25 && item.percent < 50
+                          ? "bg-[#FFB40029]"
+                          : item.percent >= 50 && item.percent < 75
+                          ? "bg-[#8C57FF29]"
+                          : item.percent >= 75
+                          ? "bg-[#56CA0029]"
+                          : ""
+                      }`}
+                    >
+                      <div
+                        className={`h-full bg-[#2E263D] rounded-full ${
+                          item.percent < 25
+                            ? "bg-[#FF4C51]"
+                            : item.percent >= 25 && item.percent < 50
+                            ? "bg-[#FFB400]"
+                            : item.percent >= 50 && item.percent < 75
+                            ? "bg-[#8C57FF]"
+                            : item.percent >= 75
+                            ? "bg-[#56CA00]"
+                            : ""
+                        }`}
+                        style={{ width: `${item.percent}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                name: "status",
+                data: (value, data) => (
+                  <div className="flex items-center gap-1">
+                    <p
+                      className={`w-[80px] p-1 text-center rounded-[4px] font-medium ${
+                        data.status === "Active"
+                          ? "text-[#039A08] bg-[#E6FEEE]"
+                          : "text-[#FF060A] bg-[#FEF0F1]"
+                      }`}
+                    >
+                      {data.status}
+                    </p>
+                  </div>
+                ),
+              },
+            ]}
+          />
         </div>
       </div>
     </div>

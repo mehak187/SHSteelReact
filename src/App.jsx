@@ -9,21 +9,28 @@ import AuthLayout from "./layouts/AuthLayout";
 import Login from "./Pages/Auth/Login";
 import CompletedProjects from "./Pages/CompletedProjects";
 import DetailProject from "./Pages/DetailProject";
+import ForgotPassword from "./Pages/Auth/ForgotPassword";
+import ResetPassword from "./Pages/Auth/ResetPassword";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route element={<AuthLayout />}>
-          <Route element={<Login/>} path="/" />
+          <Route path="/" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
         <Route element={<UserLayout />}>
           <Route element={<Dashboard />} path="/dashboard" />
           <Route element={<Calendar />} path="/calendar" />
           <Route element={<Managers />} path="/managers" />
-          <Route element={<ProjectCoordinators />} path="/projectcoordinators" />
-          <Route element={<CompletedProjects/>} path="/completedproject" />
-          <Route element={<DetailProject/>} path="/detail" />
+          <Route
+            element={<ProjectCoordinators />}
+            path="/projectcoordinators"
+          />
+          <Route element={<CompletedProjects />} path="/completedproject" />
+          <Route element={<DetailProject />} path="/detail" />
         </Route>
       </Routes>
     </Router>

@@ -15,8 +15,8 @@ export default function Calendar() {
   ];
   return (
     <div>
-      <PageTitle title="Calendar"/>
-      <div >
+      <PageTitle title="Calendar" />
+      <div>
         <TabComponent tabs={tabData} />
       </div>
       <AddNewProject open={open} onOpenChange={setOpen} />
