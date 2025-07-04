@@ -7,13 +7,16 @@ import Table from "../components/Table";
 import dummyuser from "../assets/images/dummy-user.png";
 import PageTitle from "../components/PageTitle";
 import TableMui from "../components/mui/TableMui";
+import { useGetDashboardQuery } from "../api/apiComponents/dasboardApi";
+import Loader from "../components/Loader/Loader";
 
 export default function Dashboard() {
+  const { data, isLoading } = useGetDashboardQuery();
   const cards = [
     {
       img: managers,
       title: "Managers",
-      value: "500",
+      value: data?.total_managers || 0,
       percent: "(+2%)",
       endnote: "Total Managers",
       type: "safe",
@@ -21,7 +24,7 @@ export default function Dashboard() {
     {
       img: Coordinators,
       title: "Total Coordinators",
-      value: "44",
+      value: data?.total_coordinators || 0,
       percent: "(+18%)",
       endnote: "Curent year analytics",
       type: "safe",
@@ -29,7 +32,7 @@ export default function Dashboard() {
     {
       img: TotalProjects,
       title: "Total Projects",
-      value: "19",
+      value: data?.total_projects || 0,
       percent: "(-14%)",
       endnote: "Last year analytics",
       type: "danger",
@@ -37,7 +40,7 @@ export default function Dashboard() {
     {
       img: CompletedProjects,
       title: "Completed Projects",
-      value: "23",
+      value: data?.completed_projects || 0,
       percent: "(+42%)",
       endnote: "Last months analytics",
       type: "safe",
@@ -45,7 +48,7 @@ export default function Dashboard() {
     {
       img: CompletedProjects,
       title: "Ongoing Projects",
-      value: "15",
+      value: data?.active_projects || 0,
       percent: "(+42%)",
       endnote: "Last week analytics",
       type: "safe",
@@ -224,6 +227,8 @@ export default function Dashboard() {
             ]}
           />
         </div>
+
+        <Loader loading={isLoading} />
       </div>
     </div>
   );

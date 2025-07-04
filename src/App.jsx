@@ -11,6 +11,7 @@ import CompletedProjects from "./Pages/CompletedProjects";
 import DetailProject from "./Pages/DetailProject";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
 import ResetPassword from "./Pages/Auth/ResetPassword";
+import Register from "./Pages/Auth/Register";
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/ResetPassword" element={<ResetPassword />} />
         </Route>
         <Route element={<UserLayout />}>
           <Route element={<Dashboard />} path="/dashboard" />

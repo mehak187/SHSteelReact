@@ -21,7 +21,8 @@ export default function TableMui({
   cellStyles,
   loading,
 }) {
-  const renderValue = (row, key) => {
+  const renderValue = (row, key, index) => {
+    if (key === "index") return index + 1;
     const custom = customFields?.find((f) => f.name === key);
     return custom ? custom.data(row[key], row) : row[key];
   };
@@ -104,7 +105,7 @@ export default function TableMui({
                           ...(cellStyles?.[key] || {}),
                         }}
                       >
-                        {renderValue(row, key)}
+                        {renderValue(row, key, rowIndex)}
                       </TableCell>
                     ))}
                   </TableRow>

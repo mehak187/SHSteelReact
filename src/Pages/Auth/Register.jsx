@@ -3,40 +3,46 @@ import Logo from "../../assets/images/Logo.jpg";
 import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { useLoginMutation } from "../../api/apiComponents/authApi";
+import { useRegisterMutation } from "../../api/apiComponents/authApi";
 import Loader from "../../components/Loader/Loader";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "../../redux/authSlice";
+import { toast } from "sonner";
 
-const Login = () => {
-  const dispatch = useDispatch();
+const Register = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     register,
     handleSubmit,
-
     formState: { errors },
+    setError,
   } = useForm();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const [loginUser, { isLoading }] = useLoginMutation();
+  const [registerUser, { isLoading }] = useRegisterMutation();
 
   const onSubmit = async (data) => {
     try {
-      const response = await loginUser(data).unwrap();
-      console.log("Logged in successfully:", response);
-      localStorage.setItem("token", response.token);
-      dispatch(setCredentials({ user: response.user, token: response.token }));
-      toast.success("Logged in successfully!");
-      navigate("/dashboard");
+      const response = await registerUser(data).unwrap();
+      console.log("Registered successfully:", response);
+      toast.success("Registered successfully!");
+      navigate("/");
     } catch (error) {
-      console.error("Login failed:", error?.data?.message);
-      toast.error(error?.data?.message || "Something went wrong!");
+      console.error("Registration failed:", error);
+
+      if (error?.data?.errors) {
+        const fieldErrors = error.data.errors;
+        Object.entries(fieldErrors).forEach(([fieldName, messages]) => {
+          setError(fieldName, {
+            type: "server",
+            message: messages[0],
+          });
+        });
+      } else {
+        toast.error("Something went wrong!");
+      }
     }
   };
 
@@ -46,49 +52,49 @@ const Login = () => {
         <img
           src={Logo}
           alt="Logo"
-          className="xl:w-[130px] xl:h-[97px] md:w-[100px] md:h-[97px] w-[80px] object-contain"
+          className="xl:w-[130px] xl:h-[97px] xl:max-w-[130px] md:w-[100px] md:h-[97px] md:max-w-[100px] w-[80px] max-w-[80px] object-contain"
         />
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <h5 className="text-[var(--primary)] font-medium text-2md">
-          Welcome to S-H Steel! 👋🏻
+          Create an Account
         </h5>
-        <p className="text-[#2E263DB2]">
-          Please sign-in to your account and start the adventure
-        </p>
+        <p className="text-[#2E263DB2]">Please sign up to get started</p>
 
-        {/* Email */}
+        <div className="mt-3">
+          <input
+            type="text"
+            {...register("name", { required: "Full name is required" })}
+            className="border border-[#2E263D38] text-[#2E263D66] px-3 py-2 rounded-sm w-full"
+            placeholder="Full Name"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
+        </div>
+
         <div className="mt-3">
           <input
             type="email"
-            placeholder="Email"
-            className={`border px-3 py-2 rounded-sm w-full ${
-              errors.email ? "border-red-500" : "border-[#2E263D38]"
-            }`}
             {...register("email", {
               required: "Email is required",
               pattern: {
-                value: /^\S+@\S+$/i,
-                message: "Enter a valid email",
+                value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                message: "Invalid email address",
               },
             })}
+            className="border border-[#2E263D38] text-[#2E263D66] px-3 py-2 rounded-sm w-full"
+            placeholder="Email"
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
           )}
         </div>
 
-        {/* Password */}
-        <div
-          className={`mt-3 border px-3 py-2 rounded-sm flex items-center justify-between w-full ${
-            errors.password ? "border-red-500" : "border-[#2E263D38]"
-          }`}
-        >
+        <div className="mt-3 border border-[#2E263D38] text-[#2E263D66] px-3 py-2 rounded-sm flex items-center justify-between w-full">
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            className="w-full outline-none"
             {...register("password", {
               required: "Password is required",
               minLength: {
@@ -96,6 +102,8 @@ const Login = () => {
                 message: "Password must be at least 6 characters",
               },
             })}
+            className="w-full outline-none bg-transparent"
+            placeholder="Password"
           />
           {showPassword ? (
             <RiEyeOffLine
@@ -113,40 +121,19 @@ const Login = () => {
           <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
         )}
 
-        {/* Remember Me & Forgot Password */}
-        <div className="flex items-center justify-between mt-3">
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id="remember"
-              className="accent-[#88191F] text-[15px]"
-            />
-            <label htmlFor="remember" className="text-[var(--primary)]">
-              Remember me
-            </label>
-          </div>
-          <Link
-            to="/forgot-password"
-            className="text-[#88191F] font-normal text-[15px]"
-          >
-            Forgot Password?
-          </Link>
-        </div>
-
-        {/* Submit */}
         <div className="mt-9">
           <button
             type="submit"
             className="bg-[#88191F] text-white px-4 py-2 rounded-sm w-full text-medium text-sm"
           >
-            Login
+            Register
           </button>
         </div>
 
         <p className="text-center text-sm text-[#2E263DB2] mt-4">
-          Don&apos;t have an account?{" "}
-          <Link to="/register" className="text-[#88191F] font-medium">
-            Register here
+          Already have an account?{" "}
+          <Link to="/" className="text-[#88191F] font-medium">
+            Login here
           </Link>
         </p>
       </form>
@@ -156,4 +143,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

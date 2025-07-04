@@ -13,13 +13,13 @@ export default function Calendar() {
     { label: "Calendar", content: <CalendarComponent /> },
     { label: "Capacity Calculator", content: <CapacityCalculator /> },
   ];
+
   return (
     <div>
       <PageTitle title="Calendar" />
       <div>
         <TabComponent tabs={tabData} />
       </div>
-      <AddNewProject open={open} onOpenChange={setOpen} />
     </div>
   );
 }

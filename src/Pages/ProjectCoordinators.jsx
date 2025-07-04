@@ -5,10 +5,27 @@ import { FaEllipsisVertical } from "react-icons/fa6";
 import AddCoordinator from "../components/coordinator/AddCoordinator";
 import PageTitle from "../components/PageTitle";
 import TableMui from "../components/mui/TableMui";
+import { Avatar } from "@mui/material";
+import {
+  useCreateCoordinatorMutation,
+  useDeleteCoordinatorMutation,
+  useGetCoordinatorsListQuery,
+  useUpdateCoordinatorMutation,
+} from "../api/apiComponents/coordinatorApi";
+import { useDeleteData } from "../hooks/useDeleteData";
+import Loader from "../components/Loader/Loader";
+import { getInitials } from "../utils/getInitails";
+import dayjs from "dayjs";
+import Actions from "../components/Actions";
+import EditIcon from "../components/customicons/EditIcon";
+import DeleteIcon from "../components/customicons/DeleteIcon";
 
 export default function ProjectCoordinators() {
   const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
 
+  const { data, isLoading: isFetching } = useGetCoordinatorsListQuery();
   const tabledata = [
     {
       no: "#6979",
@@ -48,6 +65,30 @@ export default function ProjectCoordinators() {
     },
   ];
 
+  const [createCoordinator, { isLoading: isCreating }] =
+    useCreateCoordinatorMutation();
+  const [updateCoordinator, { isLoading: isUpdating }] =
+    useUpdateCoordinatorMutation();
+
+  const {
+    showDeleteModal,
+    setShowDeleteModal,
+    handleDeleteClick,
+    handleConfirmDelete,
+    isLoading: deleting,
+  } = useDeleteData(useDeleteCoordinatorMutation);
+
+  const handleCreateCoordinator = async (data) => {
+    const response = await createCoordinator(data).unwrap();
+  };
+
+  const handleUpdateCoordinator = async (data) => {
+    const response = await updateCoordinator({
+      id: selectedRow.id,
+      data,
+    }).unwrap();
+  };
+
   return (
     <div className="h-full">
       <PageTitle title="Project Coordinate" />
@@ -71,16 +112,16 @@ export default function ProjectCoordinators() {
         </div>
         <div className="pb-2">
           <TableMui
-            loading={false}
+            loading={isFetching}
             th={{
               checkbox: "",
-              no: "No",
-              date: "Date",
+              index: "No",
+              created_at: "Date",
               name: "Project coordinator Name",
               status: "status",
               action: "Action",
             }}
-            td={tabledata || []}
+            td={data || []}
             customFields={[
               {
                 name: "checkbox",
@@ -96,11 +137,11 @@ export default function ProjectCoordinators() {
                 ),
               },
               {
-                name: "date",
+                name: "created_at",
                 data: (value, item) => (
                   <div className="flex items-center gap-2">
                     <p className="text-[#2E263DB2]">
-                      {item.date}, {item.time}
+                      {dayjs(value).format("MMMM D, YYYY - h:mm A")}
                     </p>
                   </div>
                 ),
@@ -109,11 +150,16 @@ export default function ProjectCoordinators() {
                 name: "name",
                 data: (value, item) => (
                   <div className="flex items-center gap-2">
-                    <img
-                      className="size-8 max-w-8 rounded-full"
-                      src={item.img}
-                      alt="img"
-                    />
+                    <Avatar
+                      sx={{
+                        bgcolor: "#88191F",
+                        width: 40,
+                        height: 40,
+                        fontSize: "1rem",
+                      }}
+                    >
+                      {getInitials(item?.name)}
+                    </Avatar>
                     <div>
                       <p className="font-medium text-sm text-[#2E263DE5]">
                         {item.name}
@@ -134,27 +180,46 @@ export default function ProjectCoordinators() {
 
               {
                 name: "status",
-                data: (value, item) => (
-                  <div className="flex items-center gap-1">
-                    <p
-                      className={`inline-block text-xs py-1 px-3 rounded-full ${
-                        item.status === "Active"
-                          ? "text-[#56CA00] bg-[#56CA0029]"
-                          : "text-[#8C57FF] bg-[#8C57FF29]"
-                      }`}
-                    >
-                      {item.status}
-                    </p>
-                  </div>
-                ),
+                data: (value, item) => {
+                  const statusText = value === 1 ? "Active" : "Inactive";
+                  const isActive = value === 1;
+
+                  return (
+                    <div className="flex items-center gap-1">
+                      <p
+                        className={`inline-block text-xs py-1 px-3 rounded-full ${
+                          isActive
+                            ? "text-[#56CA00] bg-[#56CA0029]"
+                            : "text-[#8C57FF] bg-[#8C57FF29]"
+                        }`}
+                      >
+                        {statusText}
+                      </p>
+                    </div>
+                  );
+                },
               },
               {
                 name: "action",
                 data: (value, item) => (
                   <div className="flex items-center gap-1">
-                    <button>
-                      <FaEllipsisVertical />
-                    </button>
+                    <Actions
+                      list={[
+                        {
+                          icon: EditIcon,
+                          label: "Edit",
+                          onClick: () => {
+                            setSelectedRow(item);
+                            setEditOpen(true);
+                          },
+                        },
+                        {
+                          icon: DeleteIcon,
+                          label: "Delete",
+                          onClick: () => handleDeleteClick(item.id),
+                        },
+                      ]}
+                    />
                   </div>
                 ),
               },
@@ -162,7 +227,23 @@ export default function ProjectCoordinators() {
           />
         </div>
       </div>
-      <AddCoordinator open={open} onOpenChange={setOpen} />
+      <AddCoordinator
+        open={open}
+        onOpenChange={setOpen}
+        onSubmitHandler={handleCreateCoordinator}
+      />
+
+      {editOpen && (
+        <AddCoordinator
+          open={editOpen}
+          onOpenChange={setEditOpen}
+          onSubmitHandler={handleUpdateCoordinator}
+          initialValues={selectedRow}
+          mode="edit"
+        />
+      )}
+
+      <Loader loading={isCreating || isUpdating} />
     </div>
   );
 }

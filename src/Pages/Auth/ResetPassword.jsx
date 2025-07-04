@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../assets/images/Logo.jpg";
 import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
+import { useResetPasswordMutation } from "../../api/apiComponents/authApi";
+import Loader from "../../components/Loader/Loader";
 
 const ResetPassword = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-  const location = useLocation();
-  const email = location.state?.email || "";
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+
+  const token = searchParams.get("token");
+  const email = searchParams.get("email");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -19,16 +28,34 @@ const ResetPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle password reset logic here
     if (password !== confirmPassword) {
-      alert("Passwords don't match!");
+      toast.error("Passwords don't match!");
       return;
     }
-    console.log("Password reset for:", email, "New password:", password);
-    // Typically you would send this to your backend
+    try {
+      const response = await resetPassword({
+        email,
+        token,
+        password,
+        password_confirmation: confirmPassword,
+      }).unwrap();
+      console.log("Reset password response:", response);
+
+      toast.success("Password reset successfully!");
+      navigate("/");
+    } catch (error) {
+      console.error("Reset failed:", error);
+    }
   };
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+    }
+  }, [token]);
 
   return (
     <div className="bg-white sm:p-7 px-3 py-4 flex flex-col justify-center gap-4 h-[100dvh]">
@@ -115,6 +142,8 @@ const ResetPassword = () => {
           </Link>
         </div>
       </form>
+
+      <Loader loading={isLoading} />
     </div>
   );
 };
